@@ -63,7 +63,7 @@ namespace Abc.MvcWebUI.Controllers
         }
 
         // GET: Product/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id) //Buradaki parametre http header kısmından
         {
             if (id == null)
             {
@@ -84,7 +84,7 @@ namespace Abc.MvcWebUI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Description,Price,Stock,Image,IsHome,IsApproved,CategoryId")] Product product)
-        {
+        {                       //formun body kısmından aldığımız parametreler
             if (ModelState.IsValid)
             {
                 db.Entry(product).State = EntityState.Modified;

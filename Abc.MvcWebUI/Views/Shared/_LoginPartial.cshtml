@@ -3,7 +3,14 @@
 
     @if (Request.IsAuthenticated)
     {
-        //kullanıcı adını ve logout linklerini çıkar
+        if (User.IsInRole("admin"))
+        {
+            <li class="nav-item active">
+                <a class="nav-link" href="/Product" >Yönetim Paneli</a>
+            </li>
+        }
+
+        //kullanıcı adını ve logout linklerini göster
         <li class="nav-item active">
             <a class="nav-link" href="/Account">@User.Identity.Name</a>
         </li>
@@ -13,7 +20,7 @@
     }
     else
     {
-        //login ve register linkleri çıkar
+        //login ve register linkleri göster
         <li class="nav-item active">
             <a class="nav-link" href="/Account/Login">Login</a>
         </li>

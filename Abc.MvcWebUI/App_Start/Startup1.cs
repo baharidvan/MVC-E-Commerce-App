@@ -17,7 +17,7 @@ namespace Abc.MvcWebUI.App_Start
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
                 AuthenticationType = "ApplicationCookie",
-                LoginPath = new PathString("/Account/Login")
+                LoginPath = new PathString("/Account/Login") //Kullanıcı herhangi bir sınırladığımız action metoduna gitmek istediği zaman kullanıcının varsayılan olarak gönderileceği adres
             });
         }
     }

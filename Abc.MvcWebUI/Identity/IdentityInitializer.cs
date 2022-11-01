@@ -30,7 +30,29 @@ namespace Abc.MvcWebUI.Identity
                 var role = new ApplicationRole() { Name = "user", Description = "user rolü" }; ;
                 manager.Create(role);
             }
-            
+
+            if (!context.Users.Any(i => i.Name == "cinarturan"))
+            {
+                var store = new UserStore<ApplicationUser>(context);
+                var manager = new UserManager<ApplicationUser>(store);
+                var user = new ApplicationUser() { Name = "Çınar", Surname = "turan", UserName = "cinarturan", Email = "cinarturan@gmail.com" };
+
+                manager.Create(user, "1234567");
+                manager.AddToRole(user.Id, "user");
+            }
+
+            if (!context.Users.Any(i => i.Name == "baharidvan"))
+            {
+                var store = new UserStore<ApplicationUser>(context);
+                var manager = new UserManager<ApplicationUser>(store);
+                var user = new ApplicationUser() { Name = "Baha", Surname = "Karaca", UserName = "baharidvan", Email = "baharidvankaraca@gmail.com" };
+
+                manager.Create(user, "1234567");
+                manager.AddToRole(user.Id, "admin");
+                manager.AddToRole(user.Id, "user");
+                
+            }
+
 
 
             base.Seed(context);

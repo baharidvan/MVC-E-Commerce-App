@@ -6,6 +6,7 @@ using Abc.MvcWebUI.Entity;
 
 namespace Abc.MvcWebUI.Models
 {
+    //Order Details for every user
     public class OrderDetailsModel
     {
         public int OrderId { get; set; }

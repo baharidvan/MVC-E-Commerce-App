@@ -47,16 +47,16 @@ namespace Abc.MvcWebUI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description")] Category category)
+        public ActionResult Create([Bind(Include = "Id,Name,Description")] Category category) //Bind post methodundan sadece Id,Name ve Description almak için, farklı bir parametre istemyoruz. Güvenlik açısından
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) // Category classındaki validationların hepsi yerine getirildiyse
             {
                 db.Categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            return View(category); // Eğer ki model valid değilse kullanıcının girdiği bilgiler tekrar forma geri gelir.
         }
 
         // GET: Category/Edit/5
@@ -106,9 +106,9 @@ namespace Abc.MvcWebUI.Controllers
         }
 
         // POST: Category/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Delete")] //Metodun ismi yine de Delete
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id) //Delete metodlarının parametreleri aynı olduğu için DeleteConfirmed diye ismi değişti
         {
             Category category = db.Categories.Find(id);
             db.Categories.Remove(category);

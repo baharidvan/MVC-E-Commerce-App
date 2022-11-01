@@ -3,7 +3,7 @@
     ViewBag.Title = "Checkout";
 }
 
-<style>
+<style> @* Burada Validatin Error Mesajlarının stilleri uygulanıyor.*@
     .field-validation-error {color: #f00;}
     .field-validation-valid { display: none;}
     .input-validation-error { border: 1px solid #f00; background-color:#fee; }
@@ -20,7 +20,7 @@
 
             @using (Html.BeginForm())
             {
-                @Html.ValidationSummary()
+                @Html.ValidationSummary() //JS validation ile servera gitmeden önce hata mesajlarını burada yayınlıyoruz.
 
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Username</label>

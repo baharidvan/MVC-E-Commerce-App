@@ -17,10 +17,10 @@ namespace Abc.MvcWebUI.Entity
         public double Price { get; set; }
         public int Stock { get; set; }
         public string Image { get; set; }
-        public bool IsHome { get; set; }
-        public bool IsApproved { get; set; }
+        public bool IsHome { get; set; } //Sadece Anasayfada görüntülenecek ürünler
+        public bool IsApproved { get; set; } // Listelenecek ürünler true
 
-        public int CategoryId { get; set; }
+        public int CategoryId { get; set; } //foreign key
         public Category Category { get; set; }
     }
 }

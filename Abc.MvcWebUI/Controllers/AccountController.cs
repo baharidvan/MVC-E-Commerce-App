@@ -86,7 +86,7 @@ namespace Abc.MvcWebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(Register model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) //validationlar kontrol ediliyor
             {
                 //Kayıt işlemleri
 
@@ -140,11 +140,12 @@ namespace Abc.MvcWebUI.Controllers
                     var authManager = HttpContext.GetOwinContext().Authentication;
                     var identityclaims = _userManager.CreateIdentity(user, "ApplicationCookie");
                     var authProperties = new AuthenticationProperties();
-                    authProperties.IsPersistent = model.RememberMe;
+                    authProperties.IsPersistent = model.RememberMe; //Login modelindeki rememberMe beni hatırla, cookie nin kalıcı olup olmayacağını belirler
                     authManager.SignIn(authProperties, identityclaims);
 
-                    if (!String.IsNullOrEmpty(ReturnUrl))
-                    {
+                    if (!String.IsNullOrEmpty(ReturnUrl)) //Login olmadan girilemeyen sflardan gelen login ekranında,
+                    {                                      //login olduktan sonra returnURL ile login olduktan sonra tekrar gidilmek istenen sf açılır 
+                    
                         return Redirect(ReturnUrl);
                     }
 

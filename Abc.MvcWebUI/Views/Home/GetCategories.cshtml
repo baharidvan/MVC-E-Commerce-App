@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Abc.MvcWebUI.Entity.Category>
 @{
-    var selectedCategory = Url.RequestContext.RouteData.Values["id"];
+    var selectedCategory = Url.RequestContext.RouteData.Values["id"]; //Routeconfigteki(yani adres satırındaki) id yi alıyoruz.
 }
 
 <ul class="list-group">
@@ -14,9 +14,9 @@
     {
         if (selectedCategory != null)
         {
-            if (item.Id == int.Parse(selectedCategory.ToString()))
+            if (item.Id == int.Parse(selectedCategory.ToString())) 
             {
-                //seçilen kategori ile route id si birbirine eşit.
+                //seçilen kategori ile route id si birbirine eşit ve bu durumda o kategori üzeri active stilinde olacak
                 <a href="/Home/List/@item.Id" class="list-group-item active">
                     <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                     @item.Name
