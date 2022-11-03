@@ -135,7 +135,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="theme\css\quote.css" />
     <Content Include="theme\css\style.css" />
     <Content Include="theme\home.html" />
     <Content Include="theme\img\bg.jpg" />
@@ -215,6 +214,7 @@
     <Content Include="Views\Account\Details.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Order\Details.cshtml" />
+    <Content Include="Views\Home\AboutUs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

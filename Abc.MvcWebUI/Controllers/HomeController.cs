@@ -63,5 +63,10 @@ namespace Abc.MvcWebUI.Controllers
         {
             return PartialView(_context.Categories.ToList());//Veritabanına gidip kendi başına çalışan bir view oldu
         }
+
+        public ActionResult AboutUs()
+        {
+            return View();
+        }
     }
 }
