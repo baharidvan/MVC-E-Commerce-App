@@ -39,7 +39,37 @@
 
                 </tbody>
             </table>
+        </div>
+        <div class="col-md-12">
+            <h2>Your Comments</h2>
+            <hr />
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-md-2">Comment Number</th>
+                        <th class="col-md-2">Comment Date</th>
+                        <th class="col-md-4">Content</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
 
+                    @foreach (var item in ViewBag.comment)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Date.ToShortDateString()</td>
+                            <td>
+                                @item.Content
+                            </td>
+                            <td>
+                                @Html.ActionLink("Go to Product", "Details", "Home", new { id = @item.ProductId }, new { @class = "btn btn-primary" })
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

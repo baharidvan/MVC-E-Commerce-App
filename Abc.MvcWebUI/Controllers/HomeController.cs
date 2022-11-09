@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
 using Abc.MvcWebUI.Entity;
@@ -33,6 +34,8 @@ namespace Abc.MvcWebUI.Controllers
 
         public ActionResult Details(int id)
         {
+            var comment = _context.Commments.Where(i => i.ProductId == id).ToList();
+            ViewBag.comment = comment;
             return View(_context.Products.Where(i => i.Id == id).FirstOrDefault());
         }
 
@@ -47,7 +50,7 @@ namespace Abc.MvcWebUI.Controllers
                     Description = i.Description.Length > 50 ? i.Description.Substring(0, 47) + "..." : i.Description,
                     Price = i.Price,
                     Stock = i.Stock,
-                    Image = i.Image ?? "1.jpg", //Double question mark means that =>     Image = i.Image != null i.Image : "1.jpg"
+                    Image = i.Image ?? "1.jpg", //Double question mark means that =>     Image = i.Image != null ? i.Image : "1.jpg"
                     CategoryId = i.CategoryId
                 }).AsQueryable();
 
@@ -67,6 +70,32 @@ namespace Abc.MvcWebUI.Controllers
         public ActionResult AboutUs()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult AddComment(Comment _comment, int id)
+        {
+            //var product = _context.Products.FirstOrDefault(i => i.Id == id);
+
+            var comment = new Comment();
+
+            comment.Content = _comment.Content;
+            comment.Date = DateTime.Now;
+            comment.ProductId = id;
+            comment.UserName = User.Identity.Name;
+
+            _context.Commments.Add(comment);
+            _context.SaveChanges();
+
+
+            return RedirectToAction("Details", new { id = id });
+        }
+        [HttpPost]
+        public ActionResult DeleteComment(int id)
+        {
+            Comment comment = _context.Commments.Find(id);
+            _context.Commments.Remove(comment);
+            _context.SaveChanges();
+            return RedirectToAction("Details", new { id = comment.ProductId });
         }
     }
 }

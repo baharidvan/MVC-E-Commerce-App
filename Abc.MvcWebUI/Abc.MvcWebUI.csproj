@@ -161,6 +161,7 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Entity\Category.cs" />
+    <Compile Include="Entity\Comment.cs" />
     <Compile Include="Entity\DataContext.cs" />
     <Compile Include="Entity\DataInitializer.cs" />
     <Compile Include="Entity\EnumOrderState.cs" />

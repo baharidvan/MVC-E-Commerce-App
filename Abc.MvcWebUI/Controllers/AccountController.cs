@@ -44,6 +44,9 @@ namespace Abc.MvcWebUI.Controllers
                     Total = i.Total
                 }).OrderByDescending(i => i.OrderDate).ToList();
 
+            var comment = db.Commments.Where(i => i.UserName == username).ToList(); 
+            ViewBag.comment = comment;
+
             return View(orders);
         }
         [Authorize]
