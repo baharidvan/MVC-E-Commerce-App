@@ -40,10 +40,8 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-12">
+        <div id="divCommentUser" class="col-md-12">
             @Html.Action("ShowCommentsbyUser", "Comment", new { UserName = User.Identity.Name })
-
-           
         </div>
     </div>
 </div>

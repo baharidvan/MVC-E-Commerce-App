@@ -10,6 +10,7 @@ using Abc.MvcWebUI.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
+using PagedList;
 
 namespace Abc.MvcWebUI.Controllers
 {
@@ -31,7 +32,7 @@ namespace Abc.MvcWebUI.Controllers
         }
 
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index(int? SayfaNo)
         {
             var username = User.Identity.Name;
             var orders = db.Orders
@@ -45,12 +46,23 @@ namespace Abc.MvcWebUI.Controllers
                     Total = i.Total
                 }).OrderByDescending(i => i.OrderDate).ToList();
 
-            
+
             //var comment = db.Commments.AsNoTracking().ToList(); //Veritabanında değişiklik olmadığı için AsNoTracking
             //if (!User.IsInRole("admin"))
             //    comment = comment.Where(i => i.UserName == username).ToList();
             //ViewBag.comment = comment;
 
+            if (Request.IsAjaxRequest())
+            {
+                int _sayfaNo = SayfaNo ?? 1;
+                var comment = db.Commments.AsNoTracking().ToList().Where(i => i.UserName == User.Identity.Name).ToPagedList<Comment>(_sayfaNo, 5);
+                if (User.IsInRole("admin"))
+                {
+                    comment = db.Commments.AsNoTracking().ToList().ToPagedList<Comment>(_sayfaNo, 5);
+                }
+                return PartialView("~/Views/Comment/_ShowCommentsbyUser.cshtml", comment);
+                //RedirectToAction("ShowCommentsbyUser", "Comment", new { username = username, SayfaNo = SayfaNo });
+            }
             return View(orders);
         }
         [Authorize]

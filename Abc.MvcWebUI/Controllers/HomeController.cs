@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using Abc.MvcWebUI.Entity;
 using Abc.MvcWebUI.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Abc.MvcWebUI.Controllers
 {
@@ -32,11 +34,18 @@ namespace Abc.MvcWebUI.Controllers
             return View(urunler);
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, int? SayfaNo)
         {
-            var comment = _context.Commments.Where(i => i.ProductId == id).ToList();
-            ViewBag.comment = comment;
-            return View(_context.Products.Where(i => i.Id == id).FirstOrDefault());
+            
+            //ViewBag.comment = comment;
+            var product = _context.Products.Where(i => i.Id == id).FirstOrDefault();
+            if (Request.IsAjaxRequest())
+            {
+                int _sayfaNo = SayfaNo ?? 1;
+                var comment = _context.Commments.AsNoTracking().Where(i => i.ProductId == id).ToList().ToPagedList<Comment>(_sayfaNo, 5);
+                return PartialView("~/Views/Comment/_ShowCommentsbyProduct.cshtml", comment);
+            }
+            return View(product);
         }
 
         public ActionResult List(int? id) // Routeconfigten gelen id - Controller/Action/id => Category id

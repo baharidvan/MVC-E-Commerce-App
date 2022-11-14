@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using PagedList.Mvc;
+using Abc.MvcWebUI.Models;
 
 namespace Abc.MvcWebUI.Controllers
 {
@@ -17,21 +18,32 @@ namespace Abc.MvcWebUI.Controllers
         {
             return View();
         }
-        public ActionResult ShowCommentsbyProduct(int ProductId)
+        public ActionResult ShowCommentsbyProduct(int ProductId, int? SayfaNo)
         {
-            var comment = _context.Commments.Where(i => i.ProductId == ProductId).ToList();
+            /*var comment = _context.Commments.Where(i => i.ProductId == ProductId).ToList();
             ViewBag.comment = comment;
-            return PartialView();
+            return PartialView();*/
+            int _sayfaNo = SayfaNo ?? 1;
+            var comment = _context.Commments.AsNoTracking().Where(i => i.ProductId == ProductId).ToList().ToPagedList<Comment>(_sayfaNo, 5);
+            //return PartialView(comment); //ShowCommentsbyProduct.cshtml isimli dosya olursa
+            return PartialView("~/Views/Comment/_ShowCommentsbyProduct.cshtml", comment);
         } 
-        public ActionResult ShowCommentsbyUser(string username)
+        public ActionResult ShowCommentsbyUser(string username, int? SayfaNo)
         {
-            //var comment = _context.Commments.Where(i => i.UserName == UserName).ToList();
+            int _sayfaNo = SayfaNo ?? 1;
+            //var comment = _context.Commments.AsNoTracking().ToList().ToPagedList<Comment>(_sayfaNo, 5); //Veritabanında değişiklik olmadığı için AsNoTracking
+            var comment = _context.Commments.AsNoTracking().ToList().Where(i => i.UserName == username).ToPagedList<Comment>(_sayfaNo, 5);
+            if (User.IsInRole("admin"))
+            {
+                comment = _context.Commments.AsNoTracking().ToList().ToPagedList<Comment>(_sayfaNo, 5);
+            }
             //ViewBag.comment = comment;
-            var comment = _context.Commments.AsNoTracking().ToList(); //Veritabanında değişiklik olmadığı için AsNoTracking
-            if (!User.IsInRole("admin"))
-                comment = comment.Where(i => i.UserName == username).ToList();
-            ViewBag.comment = comment;
-            return PartialView();
+            //return PartialView(comment);
+            //if (Request.IsAjaxRequest())
+            //{
+
+            //}
+            return PartialView("~/Views/Comment/_ShowCommentsbyUser.cshtml", comment);
         }
 
         [HttpPost]

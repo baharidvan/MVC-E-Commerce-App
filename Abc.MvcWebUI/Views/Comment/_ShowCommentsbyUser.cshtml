@@ -1,6 +1,11 @@
-﻿@{
+﻿@using PagedList
+@using PagedList.Mvc
+@using Abc.MvcWebUI.Entity
+@model IPagedList<Comment>
+@{
     ViewBag.Title = "ShowCommentsbyUser";
 }
+
 <h2>Your Comments</h2>
 <hr />
 <table class="table table-bordered table-striped">
@@ -16,7 +21,7 @@
     </thead>
     <tbody>
 
-        @foreach (var item in ViewBag.comment)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>@item.Id</td>
@@ -39,3 +44,14 @@
 
     </tbody>
 </table>
+<hr />
+<div style="margin-left: auto; margin-right: auto; width:300px;">
+    @*@Html.PagedListPager(Model, _sayfaNo => Url.Action("Index", "Account", new { SayfaNo = _sayfaNo }))*@
+    @Html.PagedListPager(Model, _sayfaNo => Url.Action("Index", "Account", new { SayfaNo = _sayfaNo }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "divCommentUser" }))
+</div>
+
+
+
+
+
+

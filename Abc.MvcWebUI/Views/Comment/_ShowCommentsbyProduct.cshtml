@@ -1,0 +1,43 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@using Abc.MvcWebUI.Entity
+@model IPagedList<Comment>
+@{
+    ViewBag.Title = "ShowCommentsbyProduct";
+}
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th class="col-md-2">User Name</th>
+            <th class="col-md-7">Comment</th>
+            <th class="col-md-2">Date</th>
+            <th class="col-md-2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="color:coral; font-size:20px;">@item.UserName</td>
+                <td>@item.Content</td>
+                <td>@item.Date.ToShortDateString()</td>
+                <td>
+                    @if (User.Identity.Name == item.UserName || User.IsInRole("admin"))
+                    {
+                        using (Html.BeginForm("DeleteComment", "Comment", new { id = item.Id }, FormMethod.Post))
+                        {
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div style="margin-left: auto; margin-right: auto; width:200px;">
+    @*@Html.PagedListPager(Model, _sayfaNo => Url.Action("Details", "Home", new { id = Model.FirstOrDefault().ProductId, SayfaNo = _sayfaNo }))*@
+    @*@Html.PagedListPager(Model, _sayfaNo => Url.Action("Details", "Home", new { id = Model.FirstOrDefault().ProductId, SayfaNo = _sayfaNo }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "divCommentPagedList" }))*@
+    @Html.PagedListPager(Model, _sayfaNo => Url.Action("Details", "Home", new { id = Model.FirstOrDefault().ProductId, SayfaNo = _sayfaNo }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "divCommentPagedList" }))
+</div>
+
