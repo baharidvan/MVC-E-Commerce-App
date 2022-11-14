@@ -32,7 +32,7 @@
                             </td>
                             <td>@item.OrderState</td>
                             <td>
-                                @Html.ActionLink("Details","Details",new {id=@item.Id},new {@class="btn btn-primary"})
+                                @Html.ActionLink("Details", "Details", new { id = @item.Id }, new { @class = "btn btn-primary" })
                             </td>
                         </tr>
                     }
@@ -41,37 +41,9 @@
             </table>
         </div>
         <div class="col-md-12">
-            <h2>Your Comments</h2>
-            <hr />
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th class="col-md-1">No</th>
-                        <th class="col-md-3">User Name</th>
-                        <th class="col-md-3">Comment Date</th>
-                        <th class="col-md-5">Content</th>
-                        <th class="col-md-1"></th>
-                    </tr>
-                </thead>
-                <tbody>
+            @Html.Action("ShowCommentsbyUser", "Comment", new { UserName = User.Identity.Name })
 
-                    @foreach (var item in ViewBag.comment)
-                    {
-                        <tr>
-                            <td>@item.Id</td>
-                            <td>@item.UserName</td>
-                            <td>@item.Date.ToShortDateString()</td>
-                            <td>
-                                @item.Content
-                            </td>
-                            <td>
-                                @Html.ActionLink("Go to Product", "Details", "Home", new { id = @item.ProductId }, new { @class = "btn btn-primary" })
-                            </td>
-                        </tr>
-                    }
-
-                </tbody>
-            </table>
+           
         </div>
     </div>
 </div>

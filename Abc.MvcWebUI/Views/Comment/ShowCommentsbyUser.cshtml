@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "ShowCommentsbyUser";
+}
+<h2>Your Comments</h2>
+<hr />
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th class="col-md-1">No</th>
+            <th class="col-md-3">User Name</th>
+            <th class="col-md-3">Comment Date</th>
+            <th class="col-md-5">Content</th>
+            <th class="col-md-2"></th>
+            <th class="col-md-1"></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in ViewBag.comment)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.UserName</td>
+                <td>@item.Date.ToShortDateString()</td>
+                <td>
+                    @item.Content
+                </td>
+                <td>
+                    @using (Html.BeginForm("DeleteComment", "Comment", new { id = item.Id }, FormMethod.Post))
+                    {
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Go to Product", "Details", "Home", new { id = @item.ProductId }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

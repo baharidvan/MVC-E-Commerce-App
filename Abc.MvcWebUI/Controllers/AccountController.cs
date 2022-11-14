@@ -45,11 +45,11 @@ namespace Abc.MvcWebUI.Controllers
                     Total = i.Total
                 }).OrderByDescending(i => i.OrderDate).ToList();
 
-            //var comment = db.Commments.Where(i => i.UserName == username).ToList();
-            var comment = db.Commments.AsNoTracking().ToList(); //Veritabanında değişiklik olmadığı için AsNoTracking
-            if (!User.IsInRole("admin"))
-                comment = comment.Where(i => i.UserName == username).ToList();
-            ViewBag.comment = comment;
+            
+            //var comment = db.Commments.AsNoTracking().ToList(); //Veritabanında değişiklik olmadığı için AsNoTracking
+            //if (!User.IsInRole("admin"))
+            //    comment = comment.Where(i => i.UserName == username).ToList();
+            //ViewBag.comment = comment;
 
             return View(orders);
         }

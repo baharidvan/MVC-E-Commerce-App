@@ -71,31 +71,6 @@ namespace Abc.MvcWebUI.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult AddComment(Comment _comment, int id)
-        {
-            //var product = _context.Products.FirstOrDefault(i => i.Id == id);
-
-            var comment = new Comment();
-
-            comment.Content = _comment.Content;
-            comment.Date = DateTime.Now;
-            comment.ProductId = id;
-            comment.UserName = User.Identity.Name;
-
-            _context.Commments.Add(comment);
-            _context.SaveChanges();
-
-
-            return RedirectToAction("Details", new { id = id });
-        }
-        [HttpPost]
-        public ActionResult DeleteComment(int id)
-        {
-            Comment comment = _context.Commments.Find(id);
-            _context.Commments.Remove(comment);
-            _context.SaveChanges();
-            return RedirectToAction("Details", new { id = comment.ProductId });
-        }
+    
     }
 }

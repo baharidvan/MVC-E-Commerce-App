@@ -164,6 +164,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="Identity\IdentityInitializer.cs" />
     <Compile Include="Models\AdminOrderModel.cs" />
     <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\OrderDetailsModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
@@ -223,6 +225,8 @@
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Order\Details.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />
+    <Content Include="Views\Comment\ShowCommentsbyProduct.cshtml" />
+    <Content Include="Views\Comment\ShowCommentsbyUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
