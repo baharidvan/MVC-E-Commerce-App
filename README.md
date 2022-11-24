@@ -1,12 +1,13 @@
 # ASP.NET MVC E-Commerce-App
 ## E-commerce website with basic features
-●asdasd<br />
-●adasda<br />
-●asdasd<br />
-●asdasd<br />
-●asdasd<br />
-●asdasd<br />
-●asdasd<br />
+●Listing products on Home Page and Products Page with details.<br />
+●Product details page with list of comments for every product. <br />
+●Authenticated user adding comment for products.<br />
+●Adding products to shopping cart, organize it and complete order.<br />
+●User Register, Login, Logout.<br />
+●User Page with lists of comments and orders.<br />
+●Admin Panel -> Product, Category CRUD operations and Orders State Control by Admin.<br />
+●Private Operations for only Authorized users like view comments of all users and delete them.<br />
 
 ## Home Page
 In Home Page, there is navigation bar which contains other pages links and user section. Below products that are planned to be list on Home Page not all of them. All of the products are listed in Product Page.
@@ -54,4 +55,9 @@ Users can view their own orders, orders details and comments.
 
 ## Admin Page
 Admin can view all orders and all comments. And admin also can delete any comments and change orders' state in orders details page. 
+
 <img src="https://user-images.githubusercontent.com/115007582/203783203-866f38c4-9127-42ee-8eee-e64c136a4288.png" width=70% height=70%>
+
+## About Us Page
+
+<img src="https://user-images.githubusercontent.com/115007582/203831275-35cf94d0-cca7-4b99-981a-8fccee3e4c7c.png" width=70% height=70%>
